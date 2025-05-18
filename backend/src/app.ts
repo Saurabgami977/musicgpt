@@ -25,6 +25,8 @@ app.use(cors(corsOptions));
 app.use(express.static(__dirname));
 app.use(express.json({ limit: "50mb" }));
 
+app.use("/v1/uploads", express.static("./uploads"));
+
 app.use("/v1", routesV1);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

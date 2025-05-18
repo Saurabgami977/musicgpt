@@ -4,13 +4,33 @@
             "name": "Plus",
             "monthly_price": 9.99,
             "features": [
-                "Generate 1200 songs /year",
-                "Unlimited downloads",
-                "Standard tool",
-                "Fast generation",
-                "Commercial use"
+                {
+                    "title": "Generate 1200 songs /year",
+                    "image": "/images/plus-credit.png",
+                    "index": 0
+                },
+                {
+                    "title": "Unlimited downloads",
+                    "image": "/images/plus-download.png",
+                    "index": 1
+                },
+                {
+                    "title": "Standard tool",
+                    "image": "/images/plus-feature.png",
+                    "index": 2
+                },
+                {
+                    "title": "Fast generation",
+                    "image": "/images/plus-speed.png",
+                    "index": 3
+                },
+                {
+                    "title": "Commercial use",
+                    "image": "/images/plus-commercial-use.png",
+                    "index": 4
+                }
             ],
-            "billing_cycle": "monthly",
+            "billing_cycle": "month",
             "billed": "annually",
             "tagline": "Unlock the future of music.",
             "is_popular": false
@@ -19,13 +39,33 @@
             "name": "Pro",
             "monthly_price": 16.99,
             "features": [
-                "Generate 6000 songs /year",
-                "Unlimited downloads",
-                "Unlock all features",
-                "Fast generation",
-                "Commercial use"
+                {
+                    "title": "Generate 6000 songs /year",
+                    "image": "/images/pro-credits.png",
+                    "index": 0
+                },
+                {
+                    "title": "Unlimited downloads",
+                    "image": "/images/plus-download.png",
+                    "index": 1
+                },
+                {
+                    "title": "Unlock all features",
+                    "image": "/images/pro-feature.png",
+                    "index": 2
+                },
+                {
+                    "title": "Fast generation",
+                    "image": "/images/pro-speed.png",
+                    "index": 3
+                },
+                {
+                    "title": "Commercial use",
+                    "image": "/images/plus-commercial-use.png",
+                    "index": 4
+                }
             ],
-            "billing_cycle": "monthly",
+            "billing_cycle": "month",
             "billed": "annually",
             "tagline": "Unlock the future of music.",
             "is_popular": true
@@ -34,13 +74,33 @@
             "name": "Ultra",
             "monthly_price": 32.99,
             "features": [
-                "Unlimited generations",
-                "Unlimited downloads",
-                "Unlock all features",
-                "Fast generation",
-                "Commercial use"
+                {
+                    "title": "Unlimited generations",
+                    "image": "/images/ultra-credits.png",
+                    "index": 0
+                },
+                {
+                    "title": "Unlimited downloads",
+                    "image": "/images/plus-download.png",
+                    "index": 1
+                },
+                {
+                    "title": "Unlock all features",
+                    "image": "/images/ultra-features.png",
+                    "index": 2
+                },
+                {
+                    "title": "Fast generation",
+                    "image": "/images/ultra-speed.png",
+                    "index": 3
+                },
+                {
+                    "title": "Commercial use",
+                    "image": "/images/plus-commercial-use.png",
+                    "index": 4
+                }
             ],
-            "billing_cycle": "monthly",
+            "billing_cycle": "month",
             "billed": "annually",
             "tagline": "Unlock the future of music.",
             "is_popular": false

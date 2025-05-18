@@ -6,6 +6,4 @@ const router = express.Router();
 // public routes
 router.use("/plans", plans);
 
-// protected routes
-
 export default router;

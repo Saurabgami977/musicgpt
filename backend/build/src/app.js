@@ -26,6 +26,7 @@ const server = http_1.default.createServer(app);
 app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.static(__dirname));
 app.use(express_1.default.json({ limit: "50mb" }));
+app.use("/v1/uploads", express_1.default.static("./uploads"));
 app.use("/v1", index_1.default);
 app.use((err, req, res, next) => {
     if (err instanceof ApiError_1.ApiError) {
