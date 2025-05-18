@@ -10,8 +10,11 @@ type BackdropProps = {
 const DarkBackdrop: React.FC<BackdropProps> = ({ onClose, children }) => {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-90"
+      className="fixed inset-0 z-50 flex items-center justify-center"
       onClick={onClose}
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.7)", // Optional: adds a semi-transparent black background
+      }}
     >
       <div
         onClick={(e) => e.stopPropagation()} // Prevent click events from bubbling up to the backdrop

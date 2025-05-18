@@ -5,10 +5,12 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
 import DarkBackdrop from "../../components/Backdrop/DarkBackdrop";
+import AnimatedImages from "./_components/AnimatedImages";
 
 import defaultImage from "../../assets/images/main.png";
 import checkmark from "../../assets/icons/checkmark.png";
 import info from "../../assets/icons/info.png";
+import bg from "../../assets/images/bg-2.png";
 
 import { fetchPlans } from "../../../services/apis/plans";
 
@@ -34,40 +36,43 @@ const pro = () => {
 
   const handlePlanClick = (plan: string) => {
     setActivePlan(plan);
-    console.log(plan);
-    console.log(data?.data?.plans.find((plan: any) => console.log(plan?.name)));
 
-    if (activeFeatureImage?.index !== undefined) {
+    const selectedPlan = data?.data?.plans.find((p: any) => p.name === plan);
+
+    if (activeFeatureImage?.index !== undefined && selectedPlan) {
       setActiveFeatureImage({
-        image: `${
-          "http://localhost:4000/v1/uploads" +
-          data?.data?.plans.find((plan: any) => plan.name === plan)?.features[
-            activeFeatureImage.index
-          ]?.image
+        image: `http://localhost:4000/v1/uploads${
+          selectedPlan.features[activeFeatureImage.index]?.image
         }`,
-        title: data?.data?.plans.find((plan: any) => plan.name === activePlan)
-          ?.features[activeFeatureImage.index]?.title,
+        title: selectedPlan.features[activeFeatureImage.index]?.title,
         index: activeFeatureImage.index,
       });
     }
   };
 
   return (
-    <>
+    <div>
+      <Image
+        src={bg}
+        alt="Main"
+        className="w-full h-auto object-cover cursor-pointer"
+        onClick={() => setModalOpen(true)}
+      />
+
       {modalOpen && (
         <DarkBackdrop onClose={handleClose}>
           <div className="flex justify-center">
             <div className="left rounded-bl-4xl">
-              <Image
+              <AnimatedImages
                 width={400}
                 height={600}
                 src={activeFeatureImage?.image || defaultImage}
                 alt="Main"
-                className="w-full h-auto rounded-bl-4xl rounded-tl-4xl"
+                className="w-full h-auto rounded-bl-4xl rounded-tl-4xl object-cover"
               />
             </div>
 
-            <div className="bg-[#14181C]   p-6 max-w-sm rounded-br-4xl rounded-tr-4xl text-white flex flex-col justify-center">
+            <div className="bg-[#14181C]   p-6 max-w-sm rounded-br-4xl rounded-tr-4xl text-white flex flex-col justify-center w-[400px] h-[600px]">
               {isLoading && (
                 <div className="flex justify-center items-center h-full">
                   <p className="text-white text-lg">Loading...</p>
@@ -75,7 +80,7 @@ const pro = () => {
               )}
 
               {isError && (
-                <div className="flex justify-center items-center h-full">
+                <div className="flex justify-center items-center">
                   <p className="text-white text-lg">Error loading data</p>
                 </div>
               )}
@@ -110,60 +115,14 @@ const pro = () => {
                     ))}
                   </div>
 
-                  {/* plans features */}
-                  <ul className="list-disc list-inside pt-7">
-                    {data?.data?.plans
-                      .find((plan: any) => plan.name === activePlan)
-                      ?.features.map(
-                        (
-                          feature: { title: string; image: string },
-                          index: number
-                        ) => (
-                          <li
-                            key={index}
-                            className="flex gap-2 items-center cursor-pointer"
-                          >
-                            <Image
-                              src={checkmark}
-                              alt="checkmark"
-                              className="w-3 h-2.5"
-                            ></Image>
-                            <div
-                              className="flex gap-1 items-center"
-                              onMouseEnter={() => {
-                                setActiveFeatureImage({
-                                  image: `${
-                                    "http://localhost:4000/v1/uploads" +
-                                    feature?.image
-                                  }`,
-                                  title: feature?.title,
-                                  index: index,
-                                });
-                              }}
-                            >
-                              <span
-                                className={`text-[14px] font-medium hover:text-[#ffffff] transition duration-300 ease-in-out ${
-                                  activeFeatureImage?.index === index
-                                    ? "text-[#ffffff]"
-                                    : "text-[#777A80]"
-                                }`}
-                                style={{
-                                  lineHeight: "150%",
-                                }}
-                              >
-                                {feature?.title}
-                              </span>
-                              <Image
-                                src={info}
-                                alt="info"
-                                className="w-4 h-2.4"
-                              ></Image>
-                            </div>
-                          </li>
-                        )
-                      )}
-                  </ul>
+                  <Features
+                    data={data}
+                    activePlan={activePlan}
+                    activeFeatureImage={activeFeatureImage}
+                    setActiveFeatureImage={setActiveFeatureImage}
+                  />
 
+                  {/* Price */}
                   <div className="mt-7">
                     <span className="text-[32px] font-semibold text-[#E4E6E8]">
                       {data?.data?.plans
@@ -189,7 +148,12 @@ const pro = () => {
                     </p>
                   </div>
 
-                  <button className="mt-6 bg-white  py-2 px-4 rounded-xl h-[56px] w-[336px] text-[#16191C] text-lg font-semibold">
+                  <button
+                    className="mt-6 bg-white  py-2 px-4 rounded-xl h-[56px] w-[336px] text-[#16191C] text-lg font-semibold"
+                    onClick={() => {
+                      window.open("https://musicgpt.com");
+                    }}
+                  >
                     Unlock Pro features →
                   </button>
                 </>
@@ -198,7 +162,64 @@ const pro = () => {
           </div>
         </DarkBackdrop>
       )}
-    </>
+    </div>
+  );
+};
+
+const Features = ({
+  data,
+  activePlan,
+  activeFeatureImage,
+  setActiveFeatureImage,
+}) => {
+  return (
+    <ul className="list-disc list-inside pt-7">
+      {data?.data?.plans
+        .find((plan: any) => plan.name === activePlan)
+        ?.features.map(
+          ({
+            title,
+            image,
+            index,
+          }: {
+            title: string;
+            image: string;
+            index: number;
+          }) => (
+            <li key={index} className="flex gap-2 items-center cursor-pointer">
+              <Image
+                src={checkmark}
+                alt="checkmark"
+                className="w-3 h-2.5"
+              ></Image>
+              <div
+                className="flex gap-1 items-center"
+                onMouseEnter={() => {
+                  setActiveFeatureImage({
+                    image: `${"http://localhost:4000/v1/uploads" + image}`,
+                    title: title,
+                    index: index,
+                  });
+                }}
+              >
+                <span
+                  className={`text-[14px] font-medium hover:text-[#ffffff] transition duration-300 ease-in-out ${
+                    activeFeatureImage?.index === index
+                      ? "text-[#ffffff]"
+                      : "text-[#777A80]"
+                  }`}
+                  style={{
+                    lineHeight: "150%",
+                  }}
+                >
+                  {title}
+                </span>
+                <Image src={info} alt="info" className="w-4 h-2.4"></Image>
+              </div>
+            </li>
+          )
+        )}
+    </ul>
   );
 };
 
