@@ -1,0 +1,49 @@
+{
+    "plans": [
+        {
+            "name": "Plus",
+            "monthly_price": 9.99,
+            "features": [
+                "Generate 1200 songs /year",
+                "Unlimited downloads",
+                "Standard tool",
+                "Fast generation",
+                "Commercial use"
+            ],
+            "billing_cycle": "monthly",
+            "billed": "annually",
+            "tagline": "Unlock the future of music.",
+            "is_popular": false
+        },
+        {
+            "name": "Pro",
+            "monthly_price": 16.99,
+            "features": [
+                "Generate 6000 songs /year",
+                "Unlimited downloads",
+                "Unlock all features",
+                "Fast generation",
+                "Commercial use"
+            ],
+            "billing_cycle": "monthly",
+            "billed": "annually",
+            "tagline": "Unlock the future of music.",
+            "is_popular": true
+        },
+        {
+            "name": "Ultra",
+            "monthly_price": 32.99,
+            "features": [
+                "Unlimited generations",
+                "Unlimited downloads",
+                "Unlock all features",
+                "Fast generation",
+                "Commercial use"
+            ],
+            "billing_cycle": "monthly",
+            "billed": "annually",
+            "tagline": "Unlock the future of music.",
+            "is_popular": false
+        }
+    ]
+}
