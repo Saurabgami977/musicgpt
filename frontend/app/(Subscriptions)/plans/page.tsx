@@ -14,7 +14,7 @@ import bg from "../../assets/images/bg-2.png";
 
 import { fetchPlans } from "../../../services/apis/plans";
 
-const pro = () => {
+const UpgradePlan = () => {
   const [activePlan, setActivePlan] = React.useState("Pro");
   const [modalOpen, setModalOpen] = React.useState(true);
   const [activeFeatureImage, setActiveFeatureImage] = React.useState(
@@ -223,4 +223,4 @@ const Features = ({
   );
 };
 
-export default pro;
+export default UpgradePlan;
